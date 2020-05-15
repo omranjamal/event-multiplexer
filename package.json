@@ -1,7 +1,7 @@
 {
   "name": "event-multiplexer",
-  "version": "1.0.0",
-  "description": "Multiplex events; Dynamically listen to many event emitters through one event emitter.",
+  "version": "1.0.1",
+  "description": "Multiplex events; Dynamically listen to many lots of event emitters through one event emitter.",
   "main": "dist/index.js",
   "directories": {
     "test": "test"
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bonton-connect/event-multiplexer.git"
+    "url": "git+https://github.com/hedronium/event-multiplexer.git"
   },
   "keywords": [
     "event",
@@ -25,7 +25,7 @@
   "author": "Omran Jamal <omran@bonton.app>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bonton-connect/event-multiplexer/issues"
+    "url": "https://github.com/hedronium/event-multiplexer/issues"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -35,7 +35,6 @@
     "assert": "^2.0.0",
     "mocha": "^7.1.2"
   },
-  "homepage": "https://github.com/bonton-connect/event-multiplexer#readme",
-  "readme": "README.md",
+  "homepage": "https://github.com/hedronium/event-multiplexer#readme",
   "dependencies": {}
 }
