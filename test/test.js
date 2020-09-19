@@ -43,7 +43,7 @@ describe("EventMultiplexer: Multiplexes events.", () => {
             called++;
         });
 
-        em.add(b, c);
+        em.addMany(b, c);
 
         checking = a;
         checking_na = 'X';
@@ -72,7 +72,7 @@ describe("EventMultiplexer: Multiplexes events.", () => {
         const b = new Emitter('b');
         const c = new Emitter('c');
 
-        em.add(a);
+        em.addMany(a);
         let called = 0;
 
         em.on('EVENT', (obj) => {
@@ -87,7 +87,7 @@ describe("EventMultiplexer: Multiplexes events.", () => {
             called++;
         });
 
-        em.add(b, c);
+        em.addMany(b, c);
 
         a.emit('EVENT', 'X', 'Y');
         assert.strictEqual(called, 3);
@@ -113,7 +113,7 @@ describe("EventMultiplexer: Multiplexes events.", () => {
 
         let x = null;
 
-        em.add(a, b);
+        em.addMany(a, b);
         assert.strictEqual(a.listenerCount('EVENT') + b.listenerCount('EVENT'), 0);
 
         em.on('EVENT', () => { x=true; });
@@ -130,7 +130,7 @@ describe("EventMultiplexer: Multiplexes events.", () => {
 
         let x = null;
 
-        em.add(a,b);
+        em.addMany(a,b);
 
         em.on('EVENT', () => { x=true; });
         assert.strictEqual(a.listenerCount('EVENT') + b.listenerCount('EVENT'), 2);
