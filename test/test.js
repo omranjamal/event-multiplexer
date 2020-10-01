@@ -15,6 +15,44 @@ class Emitter extends EventEmitter {
 
 
 describe("EventMultiplexer: Multiplexes events.", () => {
+
+    it("Has .has method to check if emitter has been already added", () => {
+        const em = new EM();
+        const a = new Emitter('a');
+        const b = new Emitter('b');
+        const c = new Emitter('c');
+
+        assert.strictEqual(em.has(a), false);
+        assert.strictEqual(em.has(b), false);
+        assert.strictEqual(em.has(c), false);
+
+        em.add(a);
+        em.add(c);
+
+        assert.strictEqual(em.has(a), true);
+        assert.strictEqual(em.has(b), false);
+        assert.strictEqual(em.has(c), true);
+
+        em.remove(c);
+
+        assert.strictEqual(em.has(a), true);
+        assert.strictEqual(em.has(b), false);
+        assert.strictEqual(em.has(c), false);
+    })
+
+    it("Has .values method to get an iterator over all observed objects", () => {
+        const em = new EM();
+        
+        em.add(new Emitter('a'));
+        em.add(new Emitter('b'));
+        em.add(new Emitter('c'));
+        
+        assert.strictEqual(
+            [ ...em.values() ].length, 3
+        );
+    })
+
+
     it("Should listen on all added objects past and present.", () => {
         const em = new EM();
         const a = new Emitter('a');
@@ -45,24 +83,15 @@ describe("EventMultiplexer: Multiplexes events.", () => {
 
         em.addMany(b, c);
 
-        checking = a;
-        checking_na = 'X';
-        checking_nb = 'Y';
-        a.emit('EVENT', 'X', 'Y');
+        ;(checking = a).emit('EVENT', 
+          checking_na = 'X', 
+          checking_nb = 'Y');
         assert.strictEqual(called, 3);
 
-
-        checking = b;
-        checking_na = 'XF';
-        checking_nb = 'YF';
-        b.emit('EVENT', 'XF', 'YF');
+        ;(checking = b).emit('EVENT', checking_na = 'XF', checking_nb = 'YF');
         assert.strictEqual(called, 6);
 
-
-        checking = c;
-        checking_na = 'XFI';
-        checking_nb = 'YFI';
-        c.emit('EVENT', 'XFI', 'YFI');
+        ;(checking = c).emit('EVENT', checking_na = 'XFI', checking_nb = 'YFI');
         assert.strictEqual(called, 9);
     });
 
@@ -72,7 +101,7 @@ describe("EventMultiplexer: Multiplexes events.", () => {
         const b = new Emitter('b');
         const c = new Emitter('c');
 
-        em.addMany(a);
+        em.add(a);
         let called = 0;
 
         em.on('EVENT', (obj) => {
